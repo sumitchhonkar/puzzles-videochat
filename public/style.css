@@ -14,6 +14,7 @@ video {
     object-fit: cover;
     transform: rotateY(180deg);
     margin: 2;
+    border: 5px solid #3D3D42;
 }
 .main {
     height: 100vh;
@@ -96,4 +97,9 @@ video {
     background-color: transparent;
     border: none;
     color: #F5F5F5;
+}
+
+.messages {
+    color: white;
+    list-style: none;
 }
