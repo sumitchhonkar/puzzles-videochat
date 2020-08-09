@@ -8,8 +8,15 @@ const {v4: uuidv4} = require('uuid');
 
 const io = require('socket.io')(server)
 
+const { ExpressPeerServer } = require('peer');
+const peerServer = ExpressPeerServer(server, {
+  debug: true
+});
+
 app.set('view engine', 'ejs'); //ejs is used to transfer variables from backend(node.js) to our front end
 app.use(express.static('public'));
+
+app.use('/peerjs', peerServer);
 
 app.get('/', (req,res) => {
    // res.status(200).send("Hello World!");
@@ -22,10 +29,10 @@ app.get('/:room', (req,res) => {
 })
 
 io.on('connection', socket => {
-    socket.on('join-room', (roomId) => {
+    socket.on('join-room', (roomId, userId) => {
        // console.log("joined room");
        socket.join(roomId);
-       socket.to(roomId).broadcast.emit('user-connected');
+       socket.to(roomId).broadcast.emit('user-connected', userId);
     })
 })
 
