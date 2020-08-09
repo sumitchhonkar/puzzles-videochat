@@ -4,14 +4,9 @@ const app = express();
 
 const server = require('http').Server(app);
 
-const io = require('socket.io')(server);
-
 const {v4: uuidv4} = require('uuid');
 
-const {ExpressPeerServer} = require('peer');
-const peerServer = ExpressPeerServer(server, {
-    debug:true
-});
+const io = require('socket.io')(server)
 
 app.set('view engine', 'ejs'); //ejs is used to transfer variables from backend(node.js) to our front end
 app.use(express.static('public'));
@@ -27,9 +22,10 @@ app.get('/:room', (req,res) => {
 })
 
 io.on('connection', socket => {
-    socket.on('join-room', (roomId, userId) => {
-        socket.join(roomId);
-        socket.to(roomId).broadcast.emit('user-connected', userId);
+    socket.on('join-room', (roomId) => {
+       // console.log("joined room");
+       socket.join(roomId);
+       socket.to(roomId).broadcast.emit('user-connected');
     })
 })
 
