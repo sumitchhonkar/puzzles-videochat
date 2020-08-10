@@ -13,6 +13,7 @@ video {
     width: 400px;
     object-fit: cover;
     transform: rotateY(180deg);
+    margin: 5px;
 }
 .main {
     height: 100vh;
