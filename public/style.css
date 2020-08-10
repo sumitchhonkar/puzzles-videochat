@@ -30,7 +30,8 @@ video {
     flex: 0.2;
     display: flex;
     flex-direction: column;
-    background-color: #242324;
+    background-image: url("chat-background.jpg");
+    background-size: cover;
     border-left: 1px solid #3D3D42;
 }
 
@@ -107,4 +108,8 @@ video {
 
 .unmute, .stop {
     color: #E74C3C;
+}
+
+::placeholder {
+    color: white;
 }
